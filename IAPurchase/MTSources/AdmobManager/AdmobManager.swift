@@ -4,7 +4,7 @@
 //
 //  Created by Minh Tường on 13/07/2022.
 //
-#if canImport(GoogleMobileAds)
+
 import GoogleMobileAds
 import UIKit
 
@@ -87,7 +87,7 @@ public class AdmobManager: NSObject {
 
 //MARK: Open Ads
 extension AdmobManager: GADFullScreenContentDelegate {
-    func requestAppOpenAd() {
+    public func requestAppOpenAd() {
         if self.isProversion {return}
         print("request ads")
         self.appOpenAd = nil
@@ -102,7 +102,7 @@ extension AdmobManager: GADFullScreenContentDelegate {
         })
     }
     
-    func showAppOpenAd() {
+    public func showAppOpenAd() {
         if self.isProversion {return}
         print("show ad")
         if let ad = self.appOpenAd {
@@ -116,19 +116,19 @@ extension AdmobManager: GADFullScreenContentDelegate {
     }
     
     //MARK: Delegate
-    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+    public func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         print("didFailToPresentFullScreenCContentWithError: \(error.localizedDescription)")
     }
     
-    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    public func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("adDidPresentFullScreenContent")
     }
     
-    func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
+    public func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
         print("GADFullScreenPresentingAd")
     }
     
-    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+    public func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         print("adDidDismissFullScreenContent")
         if self.interstitialHasBeenShow {
             self.interstitial = nil
@@ -150,4 +150,3 @@ extension AdmobManager {
         return nil
     }
 }
-#endif
