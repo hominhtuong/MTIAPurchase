@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 	spec.name         = "MTIAPurchase"
-	spec.version      = "1.0.1"
+	spec.version      = "1.0.2"
 	spec.summary      = "A Simple, Lightweight and Safe framework for In App Purchase."
 	spec.swift_version = ['5.1', '5.2', '5.3', '5.4', '5.5']
   
