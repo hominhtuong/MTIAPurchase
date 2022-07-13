@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "InAppPurchase",
+        "repositoryURL": "https://github.com/jinSasaki/InAppPurchase.git",
+        "state": {
+          "branch": "master",
+          "revision": "392e05ecf7aad96e12c95bccfda630380581ade7",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
