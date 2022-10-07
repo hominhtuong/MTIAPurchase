@@ -1,0 +1,8 @@
+target 'Example' do
+  use_frameworks!
+
+  pod 'MTSDK'
+  pod 'AdmobManager'
+  pod 'MTIAPurchase', :path => '../'
+
+end
