@@ -16,7 +16,7 @@ public class MTIAPurchase {
 
 //MARK: - Step 1 - Call in AppDelegate
 public extension MTIAPurchase {
-    func completeTransactions(completion: @escaping([Purchase]) -> Void) {
+    func completeTransactions(completion: (([Purchase]) -> Void)? = nil) {
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -33,7 +33,9 @@ public extension MTIAPurchase {
                     fatalError()
                 }
             }
-            completion(purchases)
+            if let completion = completion {
+                completion(purchases)
+            }
         }
     }
 }
@@ -51,9 +53,9 @@ public extension MTIAPurchase {
                 for item in MTIAPurchase.shared.configs.subscriptions {
                     group.enter()
                     if item.isSubscription {
-                        self.checkReceipt(productId: item.keyID ,receipt: receipt, completion: { status in
-                            if status {
-                                purchases.append(.subscription)
+                        self.checkReceipt(productId: item.keyID, receipt: receipt, completion: { status, expiryDate in
+                            if status, let expiryDate = expiryDate {
+                                purchases.append(.subscription(expiryDate: expiryDate))
                             }
                             
                             group.leave()
@@ -92,7 +94,7 @@ public extension MTIAPurchase {
         }
     }
     
-    func checkReceipt(productId: String, receipt: ReceiptInfo, ofType: SubscriptionType = .autoRenewable, completion: @escaping (Bool) -> Void) {
+    func checkReceipt(productId: String, receipt: ReceiptInfo, ofType: SubscriptionType = .autoRenewable, completion: @escaping (_ status: Bool, _ expiryDate: Date?) -> Void) {
         let purchaseResult = SwiftyStoreKit.verifySubscription(
             ofType: ofType,
             productId: productId,
@@ -104,13 +106,13 @@ public extension MTIAPurchase {
         case .purchased(let expiryDate, let items):
             dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss "
             print("xxx: \(productId) is valid until \(dateFormatter.string(from: expiryDate))\n)\(items)\n")
-            completion(true)
+            completion(true, expiryDate)
         case .expired(let expiryDate, let items):
             print("xxx: \(productId) is expired since \(dateFormatter.string(from: expiryDate))\n\(items)\n")
-            completion(false)
+            completion(false, nil)
         case .notPurchased:
             print("xxx: The user has never purchased \(productId)")
-            completion(false)
+            completion(false, nil)
         }
     }
 }
@@ -186,32 +188,19 @@ public extension MTIAPurchase {
             if results.restoredPurchases.count > 0 {
                 print("Restore Success: \(results.restoredPurchases)")
                 completion(true, results.restoredPurchases.compactMap {$0.productId})
-            } else{
+            } else {
                 for item in results.restoreFailedPurchases {
                     print("restore fail: \(item.0) - \(item.1 ?? "")")
                 }
-                completion(false, [])
+                completion(false, ["This item was purchased by a different Apple ID. Sign in with that Apple ID and try again"])
             }
         })
     }
 }
 
 public extension MTIAPurchase {
-    enum PurchaseType: Int {
-        case notPurchase = -1
-        case lifeTime = 0
-        case subscription = 1
-        
-        public init(value: Int) {
-            switch value {
-            case 0: self = .lifeTime
-                break
-            case 1: self = .subscription
-                break
-            default: self = .notPurchase
-                break
-            }
-        }
+    enum PurchaseType: Equatable {
+        case lifeTime
+        case subscription(expiryDate: Date)
     }
-
 }

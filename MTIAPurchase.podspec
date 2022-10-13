@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'MTIAPurchase'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'MTIAPurchase for iOS'
   s.swift_version = ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7']
   s.description  = <<-DESC
@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Sources/*.swift'
   s.static_framework   = true
-  s.deprecated = false
   s.frameworks   = 'UIKit'
   s.dependency     'SwiftyStoreKit'
 end
