@@ -23,11 +23,13 @@ public extension MTIAPurchase {
                 case .purchased, .restored:
                     if purchase.needsFinishTransaction {
                         // Deliver content from server, then:
+                        PurchaseLog("finishTransaction...")
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                     // Unlock content
                     
                 case .failed, .purchasing, .deferred:
+                    PurchaseLog("completeTransactions .failed, .purchasing, .deferred")
                     break // do nothing
                 @unknown default:
                     fatalError()
@@ -57,7 +59,6 @@ public extension MTIAPurchase {
                             if status, let expiryDate = expiryDate {
                                 purchases.append(.subscription(expiryDate: expiryDate))
                             }
-                            
                             group.leave()
                         })
                     } else {
@@ -73,7 +74,7 @@ public extension MTIAPurchase {
                     completion(purchases)
                 })
             case .error(let error):
-                print("Receipt verification failed: \(error)")
+                PurchaseLog("Receipt verification failed: \(error)")
                 completion([])
             }
         }
@@ -86,10 +87,10 @@ public extension MTIAPurchase {
         
         switch purchaseResult {
         case .purchased(let receiptItem):
-            print("\(productId) is purchased: \(receiptItem)")
+            PurchaseLog("checkLifeTime: \(productId) is purchased: \(receiptItem)")
             completion(true)
         case .notPurchased:
-            print("The user has never purchased \(productId)")
+            PurchaseLog("checkLifeTime: The user has never purchased \(productId)")
             completion(false)
         }
     }
@@ -105,13 +106,13 @@ public extension MTIAPurchase {
         switch purchaseResult {
         case .purchased(let expiryDate, let items):
             dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss "
-            print("xxx: \(productId) is valid until \(dateFormatter.string(from: expiryDate))\n)\(items)\n")
+            PurchaseLog("checkReceipt: \(productId) is valid until \(dateFormatter.string(from: expiryDate))\n)\(items)\n")
             completion(true, expiryDate)
         case .expired(let expiryDate, let items):
-            print("xxx: \(productId) is expired since \(dateFormatter.string(from: expiryDate))\n\(items)\n")
+            PurchaseLog("checkReceipt: \(productId) is expired since \(dateFormatter.string(from: expiryDate))\n\(items)\n")
             completion(false, nil)
         case .notPurchased:
-            print("xxx: The user has never purchased \(productId)")
+            PurchaseLog("checkReceipt: The user has never purchased \(productId)")
             completion(false, nil)
         }
     }
@@ -123,7 +124,7 @@ public extension MTIAPurchase {
         let keys = MTIAPurchase.shared.configs.subscriptions.compactMap({$0.keyID})
         SwiftyStoreKit.retrieveProductsInfo(Set(keys)) { result in
             if let error = result.error {
-                print("Error: \(error.localizedDescription)")
+                PurchaseLog("Error: \(error.localizedDescription)")
             }
             
             let products = Array(result.retrievedProducts.sorted(by: {$0.price.compare($1.price) == ComparisonResult.orderedAscending}))
@@ -140,7 +141,7 @@ public extension MTIAPurchase {
                 if product.needsFinishTransaction {
                     SwiftyStoreKit.finishTransaction(product.transaction)
                 }
-                print("Purchase Success: \(product.productId)")
+                PurchaseLog("Purchase Success: \(product.productId)")
                 completion(true, product.productId)
             case .error(let error):
                 var errorDes: String = ""
@@ -176,7 +177,7 @@ public extension MTIAPurchase {
                     errorDes = (error as NSError).localizedDescription
                     break
                 }
-                print(errorDes)
+                PurchaseLog(errorDes)
                 completion(false, errorDes)
             }
         }
@@ -186,11 +187,11 @@ public extension MTIAPurchase {
     func restorePurchase(completion: @escaping (Bool, [String]) -> Void) {
         SwiftyStoreKit.restorePurchases(completion: { results in
             if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
+                PurchaseLog("Restore Success: \(results.restoredPurchases)")
                 completion(true, results.restoredPurchases.compactMap {$0.productId})
             } else {
                 for item in results.restoreFailedPurchases {
-                    print("restore fail: \(item.0) - \(item.1 ?? "")")
+                    PurchaseLog("restore fail: \(item.0) - \(item.1 ?? "")")
                 }
                 completion(false, ["This item was purchased by a different Apple ID. Sign in with that Apple ID and try again"])
             }

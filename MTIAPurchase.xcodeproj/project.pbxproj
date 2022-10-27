@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1AED91290A40160075D505 /* MTLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1AED90290A40160075D505 /* MTLog.swift */; };
 		4E71902628F0425300AADABC /* MTIAPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902528F0425300AADABC /* MTIAPurchase.swift */; };
 		4E71902A28F047EB00AADABC /* SubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902928F047EB00AADABC /* SubModel.swift */; };
 		4E71902C28F051EC00AADABC /* IAPurchaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902B28F051EC00AADABC /* IAPurchaseConfiguration.swift */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E1AED90290A40160075D505 /* MTLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTLog.swift; sourceTree = "<group>"; };
 		4E71901A28F041CA00AADABC /* MTIAPurchase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MTIAPurchase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E71902528F0425300AADABC /* MTIAPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTIAPurchase.swift; sourceTree = "<group>"; };
 		4E71902928F047EB00AADABC /* SubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModel.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				4E71902528F0425300AADABC /* MTIAPurchase.swift */,
 				4E71902B28F051EC00AADABC /* IAPurchaseConfiguration.swift */,
 				4E71902928F047EB00AADABC /* SubModel.swift */,
+				4E1AED90290A40160075D505 /* MTLog.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E71902A28F047EB00AADABC /* SubModel.swift in Sources */,
+				4E1AED91290A40160075D505 /* MTLog.swift in Sources */,
 				4E71902C28F051EC00AADABC /* IAPurchaseConfiguration.swift in Sources */,
 				4E71902628F0425300AADABC /* MTIAPurchase.swift in Sources */,
 			);
