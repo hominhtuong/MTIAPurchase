@@ -23,7 +23,7 @@ extension ViewController {
         super.viewDidLoad()
         //1. Load all subs from firebase remote configs
         //2. setup IAPurchaseConfiguration
-        let subscriptionConfigs = IAPurchaseConfiguration()
+        let subscriptionConfigs = MTIAPurchase.shared.configs
         subscriptionConfigs.sharedSecret = ""
         subscriptionConfigs.subscriptions = []
         
@@ -53,10 +53,13 @@ extension ViewController {
                 print("not found any purchase")
             } else {
                 for item in purchases {
-                    if item == .lifeTime {
+                    switch item {
+                    case .lifeTime:
                         print("has been purchased lifetime")
-                    } else if item == .subscription {
-                        print("has been purchased subscription")
+                        break
+                    case .subscription(expiryDate: let date):
+                        print("has been purchased subscription: \(date.iSO8601Format)")
+                        break
                     }
                 }
             }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'MTIAPurchase'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'MTIAPurchase for iOS'
   s.swift_version = ['5.1', '5.2', '5.3', '5.4', '5.5', '5.6', '5.7']
   s.description  = <<-DESC

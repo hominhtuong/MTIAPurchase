@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GADMobileAds.sharedInstance().start()
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["3bee8640fd90f80580322bc31417d55b"]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [""]
         
         MTIAPurchase.shared.completeTransactions(completion: { purchases in
             print(purchases)
