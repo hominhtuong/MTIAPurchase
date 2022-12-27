@@ -11,7 +11,6 @@
 		4E71902628F0425300AADABC /* MTIAPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902528F0425300AADABC /* MTIAPurchase.swift */; };
 		4E71902A28F047EB00AADABC /* SubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902928F047EB00AADABC /* SubModel.swift */; };
 		4E71902C28F051EC00AADABC /* IAPurchaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E71902B28F051EC00AADABC /* IAPurchaseConfiguration.swift */; };
-		ADC5364063A3F296597BA283 /* Pods_MTIAPurchase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDFC80177A5A47907D65C8D /* Pods_MTIAPurchase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,9 +19,6 @@
 		4E71902528F0425300AADABC /* MTIAPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTIAPurchase.swift; sourceTree = "<group>"; };
 		4E71902928F047EB00AADABC /* SubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModel.swift; sourceTree = "<group>"; };
 		4E71902B28F051EC00AADABC /* IAPurchaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPurchaseConfiguration.swift; sourceTree = "<group>"; };
-		4FA2CDDB8F8A4BBD4FBDC074 /* Pods-MTIAPurchase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTIAPurchase.release.xcconfig"; path = "Target Support Files/Pods-MTIAPurchase/Pods-MTIAPurchase.release.xcconfig"; sourceTree = "<group>"; };
-		6DDFC80177A5A47907D65C8D /* Pods_MTIAPurchase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MTIAPurchase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7E25274722C6CF5E811E343 /* Pods-MTIAPurchase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MTIAPurchase.debug.xcconfig"; path = "Target Support Files/Pods-MTIAPurchase/Pods-MTIAPurchase.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,26 +26,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADC5364063A3F296597BA283 /* Pods_MTIAPurchase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		05AD2DC24D285BDDF475DE7F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6DDFC80177A5A47907D65C8D /* Pods_MTIAPurchase.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		08D0CF0F2D0E360480602BED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B7E25274722C6CF5E811E343 /* Pods-MTIAPurchase.debug.xcconfig */,
-				4FA2CDDB8F8A4BBD4FBDC074 /* Pods-MTIAPurchase.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -60,7 +45,6 @@
 				4E71901C28F041CA00AADABC /* MTIAPurchase */,
 				4E71901B28F041CA00AADABC /* Products */,
 				08D0CF0F2D0E360480602BED /* Pods */,
-				05AD2DC24D285BDDF475DE7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,7 +92,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E71902128F041CA00AADABC /* Build configuration list for PBXNativeTarget "MTIAPurchase" */;
 			buildPhases = (
-				0DC73A2C1B53C6B8EF088CFC /* [CP] Check Pods Manifest.lock */,
 				4E71901528F041CA00AADABC /* Headers */,
 				4E71901628F041CA00AADABC /* Sources */,
 				4E71901728F041CA00AADABC /* Frameworks */,
@@ -164,31 +147,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0DC73A2C1B53C6B8EF088CFC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MTIAPurchase-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4E71901628F041CA00AADABC /* Sources */ = {
@@ -327,7 +285,6 @@
 		};
 		4E71902228F041CA00AADABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7E25274722C6CF5E811E343 /* Pods-MTIAPurchase.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -356,7 +313,6 @@
 		};
 		4E71902328F041CA00AADABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FA2CDDB8F8A4BBD4FBDC074 /* Pods-MTIAPurchase.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
