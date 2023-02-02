@@ -57,14 +57,14 @@ public extension MTIAPurchase {
                     if item.isSubscription {
                         self.checkReceipt(productId: item.keyID, receipt: receipt, completion: { status, expiryDate in
                             if status, let expiryDate = expiryDate {
-                                purchases.append(.subscription(expiryDate: expiryDate))
+                                purchases.append(.subscription(keyID: item.keyID, expiryDate: expiryDate))
                             }
                             group.leave()
                         })
                     } else {
                         self.checkLifeTime(productId: item.keyID, receipt: receipt, completion: { status in
                             if status {
-                                purchases.append(.lifeTime)
+                                purchases.append(.lifeTime(keyID: item.keyID))
                             }
                             group.leave()
                         })
@@ -201,7 +201,7 @@ public extension MTIAPurchase {
 
 public extension MTIAPurchase {
     enum PurchaseType: Equatable {
-        case lifeTime
-        case subscription(expiryDate: Date)
+        case lifeTime(keyID: String)
+        case subscription(keyID: String, expiryDate: Date)
     }
 }
